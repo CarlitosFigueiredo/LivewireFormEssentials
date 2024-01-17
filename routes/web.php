@@ -24,6 +24,6 @@ Route::view('dashboard', 'dashboard')
 //     ->middleware(['auth'])
 //     ->name('profile');
 
-Route::get('/profile', EditProfile::class);
+Route::get('profile', EditProfile::class);
 
 require __DIR__.'/auth.php';

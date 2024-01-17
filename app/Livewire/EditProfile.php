@@ -3,15 +3,29 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use Illuminate\Validation\Rule;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class EditProfile extends Component
 {
     public User $user;
+
+    #[Validate]
     public string $username = '';
     public string $bio = '';
 
     public $showSuccessIndicator = false;
+
+    public function rules()
+    {
+        return [
+            'username' => [
+                'required',
+                Rule::unique('users')->ignore($this->user),
+            ]
+        ];
+    }
 
     public function mount(): void
     {
@@ -23,6 +37,8 @@ class EditProfile extends Component
 
     public function save(): void
     {
+        $this->validate();
+
         $this->user->username = $this->username;
         $this->user->bio = $this->bio;
 
