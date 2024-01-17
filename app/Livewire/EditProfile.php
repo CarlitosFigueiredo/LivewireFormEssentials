@@ -8,10 +8,12 @@ use Livewire\Component;
 class EditProfile extends Component
 {
     public User $user;
-    public $username = '';
-    public $bio = '';
+    public string $username = '';
+    public string $bio = '';
 
-    public function mount()
+    public $showSuccessIndicator = false;
+
+    public function mount(): void
     {
         $this->user = auth()->user();
 
@@ -19,10 +21,14 @@ class EditProfile extends Component
         $this->bio = $this->user->bio;
     }
 
-    public function save()
+    public function save(): void
     {
         $this->user->username = $this->username;
         $this->user->bio = $this->bio;
+
+        sleep(1);
+
+        $this->showSuccessIndicator = true;
 
         $this->user->save();
     }
