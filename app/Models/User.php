@@ -47,5 +47,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+
+        'receive_emails' => 'boolean',
+        'receive_updates' => 'boolean',
+        'receive_offers' => 'boolean',
+        'country' => 'string',
     ];
 }

@@ -14,6 +14,7 @@ class ProfileForm extends Form
     #[Validate]
     public string $username = '';
     public string $bio = '';
+    public $receive_emails = false;
 
     public function rules()
     {
@@ -30,6 +31,7 @@ class ProfileForm extends Form
         $this->user = $user;
         $this->username = $this->user->username;
         $this->bio = $this->user->bio;
+        $this->receive_emails = $this->user->receive_emails;
     }
 
     public function update()
@@ -38,5 +40,8 @@ class ProfileForm extends Form
 
         $this->user->username = $this->username;
         $this->user->bio = $this->bio;
+        $this->user->receive_emails = $this->receive_emails;
+
+        $this->user->save();
     }
 }

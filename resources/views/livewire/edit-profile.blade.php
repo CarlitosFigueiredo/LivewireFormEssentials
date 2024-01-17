@@ -29,6 +29,24 @@
             <textarea wire:model="form.bio" rows="4" class="px-3 py-2 border border-slate-300 rounded-lg"></textarea>
         </label>
 
+        <fieldset class="flex flex-col gap-2">
+            <div>
+                <legend class="font-medium text-slate-700 text-base">Receive emails?</legend>
+            </div>
+
+            <div class="flex gap-6">
+                <label class="flex items-center gap-2">
+                    <input wire:model.boolean="form.receive_emails" type="radio" name="receive_emails" value="true">
+                    Yes
+                </label>
+
+                <label class="flex items-center gap-2">
+                    <input wire:model.boolean="form.receive_emails" type="radio" name="receive_emails" value="false">
+                    No
+                </label>
+            </div>
+        </fieldset>
+
         <div class="flex">
             <button type="submit" class="relative w-full bg-blue-500 py-3 px-8 rounded-lg text-white font-medium disabled:cursor-not-allowed disabled:opacity-75">
                 Save
