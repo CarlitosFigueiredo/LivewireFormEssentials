@@ -17,6 +17,8 @@ class ProfileForm extends Form
     public $receive_emails = false;
     public $receive_updates = false;
     public $receive_offers = false;
+    public $country = '';
+
 
     public function rules()
     {
@@ -24,7 +26,10 @@ class ProfileForm extends Form
             'username' => [
                 'required',
                 Rule::unique('users')->ignore($this->user),
-            ]
+            ],
+            'country' => [
+                'required',
+            ],
         ];
     }
 
@@ -36,6 +41,7 @@ class ProfileForm extends Form
         $this->receive_emails = $this->user->receive_emails;
         $this->receive_updates = $this->user->receive_updates;
         $this->receive_offers = $this->user->receive_offers;
+        $this->country = $this->user->country;
     }
 
     public function update()
@@ -47,6 +53,7 @@ class ProfileForm extends Form
         $this->user->receive_emails = $this->receive_emails;
         $this->user->receive_updates = $this->receive_updates;
         $this->user->receive_offers = $this->receive_offers;
+        $this->user->country = $this->country;
 
         $this->user->save();
     }

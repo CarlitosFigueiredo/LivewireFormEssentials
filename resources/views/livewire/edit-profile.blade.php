@@ -3,7 +3,7 @@
 
     <form wire:submit="save" class="min-w-[30rem] flex flex-col gap-6 bg-white rounded-lg shadow p-6">
         <label class="flex flex-col gap-2">
-            <h3 class="font-medium text-slate-700 text-base">Username</h3>
+            <h3 class="font-medium text-slate-700 text-base">Username <span class="text-red-500 opacity-75" aria-hidden="true">*</span></h3>
 
             <input
                 wire:model.blur="form.username"
@@ -29,6 +29,38 @@
             <textarea wire:model="form.bio" rows="4" class="px-3 py-2 border border-slate-300 rounded-lg"></textarea>
         </label>
 
+        <label class="flex flex-col gap-2">
+            <h3 class="font-medium text-slate-700 text-base">Country <span class="text-red-500 opacity-75" aria-hidden="true">*</span></h3>
+
+            <select
+                wire:model.blur="form.country"
+                @class([
+                    'px-3 py-2 rounded-lg',
+                    'border border-slate-300' => $errors->missing('form.country'),
+                    'border-2 border-red-500' => $errors->has('form.country'),
+                ])
+                @error('form.country')
+                    aria-invalid="true"
+                    aria-description="{{ $message }}"
+                @enderror
+            >
+                <option value="" selected disabled>Choose your country</option>
+                <option>United States</option>
+                <option>Canada</option>
+                <option>Mexico</option>
+                <option>Brazil</option>
+                <option>Argentina</option>
+                <option>Germany</option>
+                <option>France</option>
+                <option>Italy</option>
+                <option>United Kingdom</option>
+            </select>
+
+            @error('form.country')
+                <p class="text-sm text-red-500" aria-live="assertive">{{ $message }}</p>
+            @enderror
+        </label>
+
         <fieldset class="flex flex-col gap-2">
             <div>
                 <legend class="font-medium text-slate-700 text-base">Receive emails?</legend>
@@ -47,7 +79,7 @@
             </div>
         </fieldset>
 
-        <fieldset x-show="$wire.form.receive_emails" x-collapse x-cloak class="flex flex-col gap-2">
+        <fieldset x-show="$wire.form.receive_emails" class="flex flex-col gap-2">
             <div>
                 <legend class="font-medium text-slate-700 text-base">Email type</legend>
             </div>
@@ -82,7 +114,6 @@
     <!-- Success Indicator... -->
     <div
         x-show="$wire.showSuccessIndicator"
-        x-cloak
         x-transition.out.opacity.duration.2000ms
         x-effect="if($wire.showSuccessIndicator) setTimeout(() => $wire.showSuccessIndicator = false, 3000)"
         class="flex justify-end pt-4"
