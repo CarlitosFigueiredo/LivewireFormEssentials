@@ -45,15 +45,10 @@
                 @enderror
             >
                 <option value="" selected disabled>Choose your country</option>
-                <option>United States</option>
-                <option>Canada</option>
-                <option>Mexico</option>
-                <option>Brazil</option>
-                <option>Argentina</option>
-                <option>Germany</option>
-                <option>France</option>
-                <option>Italy</option>
-                <option>United Kingdom</option>
+
+                @foreach (App\Enums\Country::cases() as $country)
+                    <option value="{{ $country->value }}">{{ $country->label() }}</option>
+                @endforeach
             </select>
 
             @error('form.country')

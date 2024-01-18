@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Enums\Country;
 
 class User extends Authenticatable
 {
@@ -51,6 +52,6 @@ class User extends Authenticatable
         'receive_emails' => 'boolean',
         'receive_updates' => 'boolean',
         'receive_offers' => 'boolean',
-        'country' => 'string',
+        'country' => Country::class,
     ];
 }
